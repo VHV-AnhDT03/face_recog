@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.env/
+
+# Models / weights
+*.h5
+*.pt
+*.pth
+*.onnx
+
+# Binary libs
+*.dylib
+*.so
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
