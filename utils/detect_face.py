@@ -6,6 +6,10 @@ from ultralytics import YOLO
 import cv2
 import os
 
+CONFIDENCE_THRESHOLD = 0.4
+IOU_THRESHOLD = 0.5
+
+
 # Load the YOLO model for face detection
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WEIGHT_PATH = os.path.join(BASE_DIR, 'Weight', 'yolov8n-face.pt')
@@ -27,7 +31,7 @@ def detect_face(frame):
         list: List of bounding boxes [x1, y1, x2, y2].
     """
     # Perform face detection with YOLO
-    result = yolo_model.predict(frame, conf=0.4, iou=0.5)
+    result = yolo_model.predict(frame, conf=CONFIDENCE_THRESHOLD, iou=IOU_THRESHOLD)
 
     boxes = result[0].boxes
     bounding_boxes = []

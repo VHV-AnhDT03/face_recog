@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from scipy.spatial.distance import cosine
 
+VALID_DISTANCE = 0.3
 
 def convert_str2array(input_str):
     """
@@ -59,7 +60,7 @@ def face_net(vector_c, embedding_df):
     person_name = ""
 
     # Check if distance is below threshold
-    if distances[min_index] > 0.3:
+    if distances[min_index] > VALID_DISTANCE:
         person_name = "Khong xac dinh"
         print(f"NguongMin {distances[min_index]}")
     else:
