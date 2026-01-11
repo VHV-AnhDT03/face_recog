@@ -38,7 +38,8 @@ source face_recog_env/bin/activate
 ### 3. Cài đặt dependencies
 
 ```bash
-pip install tensorflow opencv-python ultralytics pandas numpy scikit-learn scipy
+python -m pip install --upgrade pip
+python -m pip install tensorflow opencv-python pandas numpy scikit-learn scipy ultralytics
 ```
 
 ### 4. Tải trọng số mô hình
@@ -46,6 +47,15 @@ pip install tensorflow opencv-python ultralytics pandas numpy scikit-learn scipy
 Đảm bảo các file trọng số sau có trong thư mục `Weight/`:
 - `facenet_keras_weights.h5`: Trọng số cho mô hình FaceNet
 - `yolov8n-face.pt`: Trọng số cho mô hình YOLO face detection
+
+```
+Face_Recog_Final/
+├── ...
+├── Weight/
+│   ├── facenet_keras_weights.h5 # HDF5 file here
+│   └── yolov8n-face.pt          # YoloV8
+├── ...
+```
 
 ## Chuẩn bị dữ liệu
 
@@ -83,6 +93,18 @@ Script này sẽ:
 
 ## Chạy dự án
 
+### Đảm bảo quyền truy cập camera trên thiết bị
+
+Để đảm bảo IDE có quyền truy cập camera:
+
+```bash
+python camera_test.py
+```
+
+- IDE yêu cầu quyền truy cập camera
+- Webcam sẽ mở ra sau khi cho phép
+- Nhấn 'q' để thoát
+
 ### Nhận diện thời gian thực
 
 Sau khi có file `embedding_with_label.csv`, chạy:
@@ -112,10 +134,11 @@ python add_person.py
 - Ảnh sẽ được lưu tự động vào `Data/tên_người/`
 - Sau đó chạy `python create_embeds.py` để cập nhật cơ sở dữ liệu
 
-### Tùy chỉnh
+### Tùy chỉnh tham số quyết định
 
-- Ngưỡng nhận diện: Sửa trong `models/facenet.py` (hiện tại là 0.3)
-- Độ tin cậy phát hiện: Sửa trong `utils/detect_face.py` (hiện tại là 0.4)
+- Ngưỡng nhận diện: `VALID_DISTANCE` `models/facenet.py` (hiện tại là 0.3) - 
+- Độ tin cậy phát hiện: `CONFIDENCE_THRESHOLD` `utils/detect_face.py` (hiện tại là 0.4)
+- Độ trồng lấn box: `IOU_THRESHOLD` `utils/detect_face.py` (hiện tại là 0.5)
 
 ## Cấu trúc dự án
 
@@ -156,4 +179,4 @@ Face_Recog_Final/
 
 ### Không phát hiện khuôn mặt
 - Kiểm tra ánh sáng và góc chụp
-- Giảm ngưỡng confidence trong `detect_face.py`
+- Giảm ngưỡng confidence `CONFIDENCE_THRESHOLD` trong `detect_face.py`
