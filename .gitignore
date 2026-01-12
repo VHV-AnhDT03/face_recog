@@ -7,7 +7,6 @@ venv/
 .env/
 
 # Models / weights
-*.h5
 *.pth
 *.onnx
 
