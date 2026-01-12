@@ -8,7 +8,6 @@ venv/
 
 # Models / weights
 *.h5
-*.pt
 *.pth
 *.onnx
 
